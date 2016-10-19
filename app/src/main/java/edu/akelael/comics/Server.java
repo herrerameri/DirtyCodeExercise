@@ -8,10 +8,9 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 public interface Server {
+    String baseUrl = "http://gateway.marvel.com/v1/public/";
+    int ID_AMAZING_SPIDERMAN = 1010733;
 
-    /**
-     * Get all the comics from a specific character.
-     */
     @GET("characters/{characterId}/comics")
-    Call<Marvel> amazingspiderman(@Path("characterId") int characterId, @QueryMap Map<String, String> digest);
+    Call<Marvel> getCharacter(@Path("characterId") int characterId, @QueryMap Map<String, String> credentials);
 }

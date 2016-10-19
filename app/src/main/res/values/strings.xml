@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Comics</string>
+    <string name="mensaje_error">Lo sentimos, ocurrió un error al consultar los cómics. Intenta nuevamente más tarde.</string>
 </resources>
