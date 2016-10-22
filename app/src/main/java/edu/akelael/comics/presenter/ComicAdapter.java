@@ -1,4 +1,4 @@
-package edu.akelael.comics;
+package edu.akelael.comics.presenter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,15 +8,18 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
-import edu.akelael.comics.Marvel.Data.Comic;
+import edu.akelael.comics.R;
+import edu.akelael.comics.model.Marvel;
+import edu.akelael.comics.model.Marvel.Data.Comic;
+import edu.akelael.comics.view.ComicViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-class ComicAdapter extends RecyclerView.Adapter<ComicViewHolder> {
+public class ComicAdapter extends RecyclerView.Adapter<ComicViewHolder> {
     private List<Comic> comics;
 
-    ComicAdapter() {
+    public ComicAdapter() {
         this.comics = Collections.emptyList();
     }
 
@@ -31,13 +34,12 @@ class ComicAdapter extends RecyclerView.Adapter<ComicViewHolder> {
     @Override
     public void onBindViewHolder(ComicViewHolder holder, int position) {
         final Comic comic = comics.get(position);
-        holder.item = comic;
-        holder.title.setText(comic.getTitle());
+        holder.setTitle(comic.getTitle());
         Picasso.with(holder.itemView.getContext())
                 .load(comic.getThumbnailURL())
                 .fit()
                 .centerInside()
-                .into(holder.thumbnail);
+                .into(holder.getThumbnail());
     }
 
     @Override

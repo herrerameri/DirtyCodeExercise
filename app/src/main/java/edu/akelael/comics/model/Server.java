@@ -1,4 +1,4 @@
-package edu.akelael.comics;
+package edu.akelael.comics.model;
 
 import java.util.Map;
 
