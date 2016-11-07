@@ -1,9 +1,9 @@
-package edu.akelael.comics;
+package edu.akelael.comics.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class Marvel {
+public class ComicData {
     public Data data;
 
     public static class Data {
