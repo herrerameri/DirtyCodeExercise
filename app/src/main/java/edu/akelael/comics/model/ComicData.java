@@ -3,7 +3,7 @@ package edu.akelael.comics.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Marvel {
+public class ComicData {
     public Data data;
 
     public static class Data {

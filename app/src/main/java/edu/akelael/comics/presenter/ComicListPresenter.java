@@ -5,12 +5,12 @@ import java.util.List;
 import edu.akelael.comics.model.ComicListModel;
 import edu.akelael.comics.model.IComicListModel;
 import edu.akelael.comics.model.IComicListModelCallbacks;
-import edu.akelael.comics.model.Marvel;
+import edu.akelael.comics.model.ComicData;
 import edu.akelael.comics.view.IComicListActivity;
 
 public class ComicListPresenter implements IComicListPresenter, IComicListModelCallbacks {
-    IComicListActivity view;
-    IComicListModel model;
+    private IComicListActivity view;
+    private IComicListModel model;
 
     public ComicListPresenter(IComicListActivity view){
         this.view = view;
@@ -24,7 +24,7 @@ public class ComicListPresenter implements IComicListPresenter, IComicListModelC
     }
 
     @Override
-    public void getComicsCallback(List<Marvel.Data.Comic> comicList) {
+    public void getComicsCallback(List<ComicData.Data.Comic> comicList) {
         if(comicList == null){
             view.showError();
         }

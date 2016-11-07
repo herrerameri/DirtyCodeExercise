@@ -8,31 +8,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ComicListModel implements IComicListModel {
-    Server server;
-    Retrofit retrofit;
-    HashMap<String, String> mMap;
+    private static Server server;
+    private static Retrofit httpClient;
+    private static HashMap<String, String> apiRequestContent;
+    private final static int RESPONSE_OK = 200;
 
     @Override
     public void initializeApiConnection(){
-        Retrofit.Builder retrofitBuilder;
-        retrofitBuilder = new Retrofit.Builder();
-        retrofitBuilder.baseUrl(server.baseUrl);
-        retrofitBuilder.addConverterFactory(GsonConverterFactory.create());
-        retrofit = retrofitBuilder.build();
-        mMap = new HashMap<>();
-        mMap.put("ts", "ts");
-        mMap.put("apikey", "apikey");
-        mMap.put("hash", "hash");
+        initializeHttpClient();
+        initializeRequestContent();
     }
 
     @Override
     public void getComics(final IComicListModelCallbacks listener){
-        server = retrofit.create(Server.class);
-        Call<Marvel> marvelCall = server.getCharacter(Server.ID_AMAZING_SPIDERMAN, mMap);
-        marvelCall.enqueue(new Callback<Marvel>() {
+        server = httpClient.create(Server.class);
+        Call<ComicData> marvelCall = server.getCharacter(Server.ID_AMAZING_SPIDERMAN, apiRequestContent);
+        marvelCall.enqueue(new Callback<ComicData>() {
             @Override
-            public void onResponse(Call<Marvel> call, Response<Marvel> response) {
-                if (response.code() == 200) {
+            public void onResponse(Call<ComicData> call, Response<ComicData> response) {
+                if (response.code() == RESPONSE_OK) {
                     listener.getComicsCallback(response.body().data.results);
                 }
                 else{
@@ -40,9 +34,24 @@ public class ComicListModel implements IComicListModel {
                 }
             }
             @Override
-            public void onFailure(Call<Marvel> call, Throwable t) {
+            public void onFailure(Call<ComicData> call, Throwable t) {
                 listener.getComicsCallback(null);
             }
         });
+    }
+
+    private void initializeRequestContent(){
+        Retrofit.Builder retrofitBuilder;
+        retrofitBuilder = new Retrofit.Builder();
+        retrofitBuilder.baseUrl(server.baseUrl);
+        retrofitBuilder.addConverterFactory(GsonConverterFactory.create());
+        httpClient = retrofitBuilder.build();
+    }
+
+    private void initializeHttpClient(){
+        apiRequestContent = new HashMap<>();
+        apiRequestContent.put("ts", "ts");
+        apiRequestContent.put("apikey", "apikey");
+        apiRequestContent.put("hash", "hash");
     }
 }

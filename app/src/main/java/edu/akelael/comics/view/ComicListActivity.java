@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import edu.akelael.comics.R;
-import edu.akelael.comics.model.Marvel;
+import edu.akelael.comics.model.ComicData;
 import edu.akelael.comics.presenter.ComicAdapter;
 import edu.akelael.comics.presenter.ComicListPresenter;
 import edu.akelael.comics.presenter.IComicListPresenter;
@@ -54,7 +54,7 @@ public class ComicListActivity extends AppCompatActivity implements IComicListAc
     }
 
     @Override
-    public void setAndShowComics(List<Marvel.Data.Comic> comicList) {
+    public void setAndShowComics(List<ComicData.Data.Comic> comicList) {
         adapter.setComics(comicList);
         adapter.notifyDataSetChanged();
     }

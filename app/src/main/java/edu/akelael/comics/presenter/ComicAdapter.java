@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import edu.akelael.comics.R;
-import edu.akelael.comics.model.Marvel;
-import edu.akelael.comics.model.Marvel.Data.Comic;
+import edu.akelael.comics.model.ComicData;
+import edu.akelael.comics.model.ComicData.Data.Comic;
 import edu.akelael.comics.view.ComicViewHolder;
 
 import java.util.Collections;
@@ -51,7 +51,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicViewHolder> {
         return count;
     }
 
-    public void setComics(List<Marvel.Data.Comic> comics) {
+    public void setComics(List<ComicData.Data.Comic> comics) {
         this.comics = comics;
     }
 }
